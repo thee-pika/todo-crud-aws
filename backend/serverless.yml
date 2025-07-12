@@ -1,0 +1,23 @@
+service: todo-service
+
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-south-1
+
+functions:
+  todo:
+    handler: app/index.TodoHandler
+    events:
+      - httpApi:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-offline
+
+package:
+  individually: true
+
+
